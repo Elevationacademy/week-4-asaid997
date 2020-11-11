@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+
+
+    <script id="classmates-template" type="text/x-handlebars-template">
+        <ul>
+          {{#each classmates}}
+            <div>{{name}} - {{description}}</div>
+          {{/each}}
+        </ul>
+      </script>
+      <script id="menu-template" type="text/x-handlebars-template">
+        <ul>
+          {{#each menu}}
+            {{#if socialNetwork}}
+            <li><a href="{{link}}">{{name}}</a></li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </script>
+    <script src="main.js"></script>
+</body>
+</html>
