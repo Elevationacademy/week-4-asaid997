@@ -9,9 +9,74 @@ class Person {
         this.courses.push(course)
     }
 }
-closed
-class Principal extends Person{
 
+class Student extends Person {
+    constructor(name, startYear) {
+        super(name, startYear)
+        this.grades = []
+    }
+
+    receiveGrade(courseName, finalGrade) {
+        this.grades.push({
+            course: courseName,
+            grade: finalGrade
+        })
+    }
+}
+
+class Teacher extends Person {
+    constructor(name, startYear, salary) {
+        super(name, startYear)
+        this.salary = salary
+        this.courses = {} //override the courses attribute
+    }
+
+    //override the addCourse method
+    addCourse(course) {
+        if(this.courses[course]){
+            return this.courses[course]++
+        }
+        this.courses[course] = 1
+    }
+
+    giveGrade(student, courseName, grade) {
+        student.receiveGrade(courseName, grade)
+    }
+}
+
+class TeachingAssistant extends Teacher {
+    constructor(name, startYear, salary) {
+        super(name, startYear, salary)
+    }
+}
+
+class Principal extends Person{
+    constructor(name,startYear){
+        super(name,startYear)
+        this.teachers = []
+        this.students = []
+
+    }
+
+    hireTeacher(teacher){
+        this.teachers.push(teacher)
+        console.log(`${this.name} just hired ${teacher.name}`)
+    }
+
+    recruitStudent(student){
+        this.students.push(student)
+    }
+
+    expelStudent(student){
+        this.students.filter((stdnt, index) => {
+            if(student.name === stdnt.name) return this.students.splice(index,1)
+        })
+    }
+
+    transferStudent(student,principal){
+        this.expelStudent(student)
+        principal.recruitStudent(student)
+    }
 }
 
 // Create a Principal class.
@@ -37,21 +102,21 @@ const s2 = new Student("Byron", 2016)
 
 //1 & 2
 p1.hireTeacher(t1) //should print "Martin just hired Cassandra"
-console.log(p1.teachers) //should print Array(1) [Teacher] - the teacher should be Cassandra
+console.log(...p1.teachers) //should print Array(1) [Teacher] - the teacher should be Cassandra
 
 p1.hireTeacher(t2) //should print "Martin just hired Kevin"
-console.log(p1.teachers) //should print Array(2) [Teacher, Teacher]
+console.log(...p1.teachers) //should print Array(2) [Teacher, Teacher]
 
 //3 & 4
 p1.recruitStudent(s1)
 p1.recruitStudent(s2)
-console.log(p1.students) //should print Array(2) [Student, Student]
+console.log(...p1.students) //should print Array(2) [Student, Student]
 
 //5
 p1.expelStudent(s1)
-console.log(p1.students) //should print Array(1) [Student] - the student should be Byron
+console.log(...p1.students) //should print Array(1) [Student] - the student should be Byron
 
-//6
+// //6
 p1.transferStudent(s2, p2)
 console.log(p1.students) //should print Array(0) []
-console.log(p2.students) //should print Array(1) [Student] - the student should be Byron
+console.log(...p2.students) //should print Array(1) [Student] - the student should be Byron
