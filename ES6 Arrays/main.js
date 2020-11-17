@@ -1,4 +1,4 @@
-const data = [
+const data1 = [
     {
         "id": 1,
         "name": "Leanne Graham",
@@ -231,22 +231,22 @@ const data = [
     }
 ]
 
-const ex1 = data.map(r => {return {email: r.email , CompanyName: r.company.name}})
+const ex1 = data1.map(r => {return {email: r.email , CompanyName: r.company.name}})
 console.log(ex1)
 
-const ex2 = data.filter(r => r.address.zipcode[0] == 5)
+const ex2 = data1.filter(r => r.address.zipcode[0] == 5)
 console.log(ex2)
 
-const ex3 = data.filter(r => r.address.zipcode[0] == 5).map(r => r.id)
+const ex3 = data1.filter(r => r.address.zipcode[0] == 5).map(r => r.id)
 console.log(ex3)
 
-const ex4 = data.map(r => r.name).filter(r => r[0] == 'C')
+const ex4 = data1.map(r => r.name).filter(r => r[0] == 'C')
 console.log(ex4)
 
-const ex5 = data.every(r => r.address.city === "South Christy")
+const ex5 = data1.every(r => r.address.city === "South Christy")
 console.log("everyone lives in South Christy: "+ex5)
 
-const ex6 = data.filter(r => r.address.suite === "Apt. 950").map(r => r.company.name)
+const ex6 = data1.filter(r => r.address.suite === "Apt. 950").map(r => r.company.name)
 console.log(ex6)
 
 // Write a named function that receives a single parameter, user.
@@ -256,4 +256,4 @@ console.log(ex6)
 const printUser = function(user){
     console.log(`${user.name} lives in ${user.address.city}, and own the compay ${user.company.name}`)
 }
-data.forEach(printUser)
+data1.forEach(printUser)
